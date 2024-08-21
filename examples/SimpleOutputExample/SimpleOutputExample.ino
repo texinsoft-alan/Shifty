@@ -1,13 +1,13 @@
 #include <Shifty.h>
 
 // Declare the shift register
-Shifty shift; 
+Shifty shift;
 
 void setup() {
   // Set the number of bits you have (multiples of 8)
   shift.setBitCount(8);
 
-  // Set the clock, data, and latch pins you are using
+  // Set the data, clock and latch pins you are using, for 74hc595: DS, SH_CP, ST_CP
   // This also sets the pinMode for these pins
   shift.setPins(11, 12, 8); 
 }
@@ -21,6 +21,6 @@ void loop() {
   shift.writeBit(1, LOW);
   delay(500);
   shift.writeBit(3, LOW);
- 
+
   delay(500);
 }

@@ -3,6 +3,8 @@ Shifty
 A Flexible 74HC595 Manager for Arduino
 --------------------------------------
 
+中文说明请[点击此处](./README_zh-CN.md)。
+
 The Shifty library for Arduino is a very flexible way to manage 74HC595 shift registers.  It allows you to write to individual outputs just like "digitalWrite", allows you to daisy-chain shift registers together, and, if you wire it according to the instructions in this document, allows you to use your shift register for *both* input *and* output pins with only one additional pin used.  This makes it ideal for usage with an ATTiny, though it does use up a bit of space on the device.
 
 ### Inspiration

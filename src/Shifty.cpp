@@ -11,17 +11,17 @@ void Shifty::setBitCount(int bitCount) {
     this->dataModes[i] = 0;
     this->readBuffer[i] = 0;
   }
-}  
+}
 
 void Shifty::setPins(int dataPin, int clockPin, int latchPin, int readPin) {
   pinMode(dataPin, OUTPUT);
   pinMode(clockPin, OUTPUT);
   pinMode(latchPin, OUTPUT);
-  pinMode(readPin, INPUT);
   this->dataPin = dataPin;
   this->clockPin = clockPin;
   this->latchPin = latchPin;
   if(readPin != -1) {
+    pinMode(readPin, INPUT);
     this->readPin = readPin;
   }
 }
@@ -76,7 +76,9 @@ void Shifty::setBitMode(int bitnum, bool mode) {
 bool Shifty::getBitMode(int bitnum){ //true == input
   int bytenum = bitnum / 8; // get working byte offset
   int offset = bitnum % 8;  // get working bit offset
+#if (0)
   byte b = this->dataModes[bytenum]; //set b to working byte
+#endif
   return bitRead(this->dataModes[bytenum], offset);
 }
 
@@ -126,6 +128,7 @@ bool Shifty::readBitHard(int bitnum) {
         }
       }
     }
+    this->writeBuffer[i] = outb;
   }
 
   // Flush
@@ -145,8 +148,10 @@ bool Shifty::readBitHard(int bitnum) {
 void Shifty::readAllBits() {
   for(int i = 0; i < this->byteCount; i++) {
     byte mask = this->dataModes[i];
+#if (0)
     byte outb = this->writeBuffer[i];
     byte inb = 0;
+#endif
     for(int j = 0; j < 8; j++) {
       if(bitRead(mask, j)) {
         readBitHard(i * 8 + j);
